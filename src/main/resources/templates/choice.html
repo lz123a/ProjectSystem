@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/choice/chioce.css" rel="stylesheet">
+    <script src="js/choice/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="js/choice/jQuery1.7.js" type="text/javascript"></script>
+    <script src="js/choice/jquery-1.3.1.js" type="text/javascript"></script>
+    <script src="js/choice/choice.js" type="text/javascript" ></script>
+    <script th:inline="javascript">
+        function load() {
+            var standards = new Array();
+            standards = [[${standardNames}]];
+            for(var i = 0; i<standards.length; i++){
+         //       alert(standards[i]);
+                initOneStandard(standards[i]);
+            }
+        }
+
+    </script>
+</head>
+<body  onload="load()">
+<header>
+    <div class="pic"><img src="img/123.png"></div>
+    <div class="word">
+        <h1>哈尔滨华德学院</h1>
+        <h4>软件工程项目实践管理系统-诚毅求真笃学强记</h4>
+    </div>
+</header>
+<div class="clear"></div>
+<div id="main">
+    <input type="button" id="changebtn" value="修改项目"  onclick="show()"/>
+    <div id="left">
+
+        <!-- 表格1 -->
+
+        <div id="tab1" class="tab1">
+            <table id="waybillTable" class="bordered">
+                <thead>
+                <tr>
+                    <th style="font: 14px/50px '微软雅黑'; color: #ffffff; text-align:center; padding-left: 100px;">全选<input type="checkbox" onclick="myclick(this,'item');"></th>
+                </tr>
+                </thead>
+                <tbody id="tab_sendValue1">
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+        <div id="transport">
+            <input type="button" value=">>" style="width:160px; height: 40px; margin-top: 30px; background: cornflowerblue; border: none; color: #ffffff;" onclick="sendValueToRight();" /> </br>
+            <input type="button" value="<<" style="width:160px; height: 40px; margin-top: 40px; background: cornflowerblue; border: none; color: #ffffff;" onclick="sendValueToLeft();" />
+        </div>
+        <input type="submit" id="sb" value="提交" onclick="saveChangeStandard()">
+        <div id="right">
+            <!-- 表格3 -->
+            <div id="tab2">
+                <table class="bordered">
+                    <thead>
+                    <tr>
+                        <th style="font: 14px/50px '微软雅黑'; color: #ffffff; text-align: center; float: right;">全选<input type="checkbox" id="check_all3" onclick="myclick(this,'item1');"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="tab_sendValue3" name="tab_sendValue3">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+</div>
+
+<div id="increase">
+    <div id="light" class="white_content">
+        <div class="fram">
+            <input type="text" id="tt" style="width: 160px; height: 30px; border: 1px solid cornflowerblue;" /><br>
+            <input type="button" id="btn1" value="增加项目"  onclick="add()" style="width: 160px; height: 30px; background: cornflowerblue; margin-top: 30px; border: none; color: #ffffff"/><br>
+            <input type="button" id="btn2" onclick = "del()" value="删除项目" style="width: 160px; height: 30px; background: cornflowerblue; margin-top: 30px; border: none;color: #ffffff"/><br>
+            <input type="button"  id="off" onclick = "hide()"value="保存" style="color: #ffffff;"/>
+        </div>
+        <div id="insidetab_div"  class="insidetab_div">
+
+            <table  id="insidetab" class="bordered">
+                <thead>
+                <tr>
+                    <th style="font: 14px/50px '微软雅黑'; color: #ffffff; text-align:center; padding-left: 100px ">全选<input type="checkbox" id="check_all" style="border: 1px solid #cccccc;" onclick="myclick(this,'item2');"></th>
+                </tr>
+                </thead>
+                <tbody id="tab_sendValue2" name="tab_sendValue2">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    </div>
+<div id="fade" class="black_overlay">
+</div>
+<footer><p class="f">@哈尔滨华德学院软件项目管理系统</p></footer>
+</body>
+</html>
+
+<SCRIPT LANGUAGE="JavaScript">
+    function _add(){
+        var e=$("#insidetab_div");
+        e.html(e.html()+"<input>");
+    }
+</SCRIPT>

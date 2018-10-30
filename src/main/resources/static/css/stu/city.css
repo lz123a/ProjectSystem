@@ -1,0 +1,81 @@
+@charset "utf-8";
+.city {width: 1500px;height:30px;}
+
+.city .travelerR {
+    position: absolute;
+    top: 560px;
+}
+.city .carL01 {
+    position: absolute;
+    left: -20%;
+    top: 560px;
+}
+.city .carL02 {
+    position: absolute;
+    left: -20%;
+    top: 560px;
+}
+.city .taxi_1L {
+    position: absolute;
+    left: -25%;
+    top: 560px;
+}
+.city .taxi_2L {
+    position: absolute;
+    left: -20%;
+    top: 560px;
+}
+.city .walkerLeft01 {
+    position: absolute;
+    left: 45%;
+    top: 560px;
+}
+.city .walkerL2 {
+    position: absolute;
+    left: 45%;
+    top: 560px;
+}
+.city .walkerLeft02 {
+    position: absolute;
+    left: 60%;
+    top: 560px;
+}
+.city .walkerLeft03 {
+    position: absolute;
+    left: 80%;
+    top: 560px;
+}
+.city .walkerRight01 {
+    position: absolute;
+    right: 70%;
+    top: 560px;
+}
+.city .walkerRight02 {
+    position: absolute;
+    left: 90%;
+    top: 560px;
+}
+.city .walkerRight03 {
+    position: absolute;
+    left: 88%;
+    top: 560px;
+}
+.city .walkerRight04 {
+    position: absolute;
+    left: 60%;
+    top: 560px;
+}
+.city .walkerR2 {
+    position: absolute;
+    left: 45%;
+    top: 560px;
+}
+.city .walkerR3 {
+    position: absolute;
+    left: 45%;
+    top: 560px;
+    transform: rotateY(180deg);
+}
+.city .item08 {
+    position: absolute;
+}

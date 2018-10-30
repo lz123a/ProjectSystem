@@ -1,0 +1,7 @@
+server:
+  port: 8086
+
+
+people:
+  name: lc
+  age: 20

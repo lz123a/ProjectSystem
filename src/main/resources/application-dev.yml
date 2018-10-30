@@ -1,0 +1,7 @@
+server:
+  port: 8081
+  context-path: /learn
+
+people:
+  name: lz
+  age: 18

@@ -1,0 +1,60 @@
+body{ font:#000;}
+.panel-body{ margin:0; padding:0;}
+
+.lb div{
+    float:left;
+	margin-right:50px;
+} 
+
+.an{
+	width:500px;
+	height:30px;
+	float:right;
+	
+}
+
+.an div{
+    float:left;
+	margin-right:20px;
+} 
+
+
+.domian_tab { 
+	color:black;
+	width:100%;
+	border-color:#337ab7;
+	border-collapse:collapse;
+	text-align:center;
+}
+
+.db {
+	background:#FFF;
+}
+
+.zb {
+	background:#ffffff;
+	width:80px; 
+	border:0px;
+	height:40px;
+	-webkit-appearance:none; 
+	text-align:center;
+}
+.ppst{ 
+     display: none; 
+     position: absolute; 
+     top: 0%; 
+     left: 0%; 
+     width: 100%; 
+     height: 100%; 
+ 
+} 
+.over { 
+     display: none; 
+     position: relative; 
+	 margin: 0 auto;
+     width: 70%; 
+     height: 70%; 
+     background-color: red; 
+     z-index:1002;	<!-- 优先级 -->
+     overflow: auto;	 <!-- 内容滚动条 -->	
+        } 

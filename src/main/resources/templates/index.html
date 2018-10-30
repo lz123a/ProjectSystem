@@ -1,0 +1,211 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <link href="css/index/index.css" rel="stylesheet" type="text/css" media="all"/>
+  <link href="css/index/bootstrap.min.css" rel="stylesheet">
+  <link href="css/index/bootstrap.css" rel="stylesheet">
+  <script src="js/index/jQuery1.7.js" type="text/javascript"></script>
+  <script src="js/index/bootstrap.js" type="text/javascript"></script>
+  <script src="js/index/index.js" type="text/javascript"></script>
+  <title>软件工程项目实践管理系统</title>
+
+ </head>
+
+<body >
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="height:60px">
+        	<h3 class="panel-title" style="font:26px/40px '微软雅黑'; float: left;">软件工程项目实践管理系统</h3>
+            <h5 th:text="'登录用户：' + ${name}" style="float: left; margin-left: 920px;"></h5>
+            <h5><a href="/logout" style="color: #ffffff; float: right;">[退出]</a></h5>
+        </div>
+        <div class="panel-body">
+			<div id="passpt">
+                <div id="passport1" class="ppst">
+                    <input type="button"  class="closeppst" value="关闭" onclick="hide1()"/>
+                    <input type="button" class="chooesweek" value="第一周" onclick="changeweek(value)"/>
+                    <img src="img/zb.png" id="zb1" class="zbphoto" width="500" height="500" />
+                    <input type="button" class="chooesweek" value="第二周" onclick="changeweek(value)"/>
+                    <img src="img/zb2.png" id="zb2" class="zbphoto" width="500" height="500" />
+                    <input type="button" class="chooesweek" value="第三周" onclick="changeweek(value)"/>
+                    <img src="img/zb3.png" id="zb3" class="zbphoto" width="500" height="500" />
+                </div>
+			<div id="passport2" class="ppst">
+                <input type="button" class="closeppst" value="关闭" onclick="hide2()"/>
+                <img src="img/zb2.png" width="500" class="zbphoto" height="500" />
+            </div>
+			<div id="passport3" class="ppst" data-toggle="modal" data-target="#a">
+			
+            <div class="container">
+			<div class="modal fade" id="a" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    		<div class="modal-dialog">
+      		 <div class="modal-content" >
+             <div class="modal-header">
+                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">周报</h4> 
+             </div>  
+			 <div class="modal-body" style="width:800px;height:600px">
+				 <img src="img/zb3.png" width="500" class="zbphoto" height="500"/>
+			 </div>
+			 <div class="modal-footer">
+				<button type="button" class="btn btn-primary">  提交更改  </button>
+			 </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+			
+		</div>
+	</div>
+ 
+      
+            <div class="lb">
+            <form role="form">
+            <div class="form-group" data-role="controlgroup" data-type="horizontal" style="float:left">
+                 <label for="name" style="color:#337ab7">请选择学期</label>
+                <select class="form-control" id="semester" name="semester">
+                    <option>===请选择===</option>
+                    <option  th:each="list:${semesterNames}"  th:text="${list.name }"></option>
+                </select>
+            </div>
+            <div class="form-group" data-role="controlgroup" data-type="horizontal" style="float:left">
+                 <label for="name" style="color:#337ab7">请选择学年</label>
+                <select class="form-control" id="grade" name="grade">
+                    <option>===请选择===</option>
+                </select>
+            </div>
+            <div class="form-group" data-role="controlgroup" data-type="horizontal" style="float:left">
+            <label for="name" style="color:#337ab7">请选择课程</label>
+            <select class="form-control" id="course">
+                <option>===请选择===</option>
+            </select>
+            </div>
+            <div class="form-group" data-role="controlgroup" data-type="horizontal" style="float:left">
+            <label for="name" style="color:#337ab7">请选择班级</label>
+            <select class="form-control" id="cla">
+                <option>===请选择===</option>
+            </select>
+            </div>
+        	<div class="an">
+                <div class="xan">
+                    <input type="button" class="btn btn-primary btn-lg" id="changeStandard" name="changeStandard" onclick="changeStandard1()" value="修改考核标准">
+                </div>
+                <div class="xan">
+                    <input type="button" class="btn btn-primary btn-lg" id="2" value="生成等级成绩表">
+                </div>
+                <div class="xan">
+                    <input type="button" class="btn btn-primary btn-lg" id="changeGrade" name="changeGrade" value="修改成绩">
+                </div>
+            </div>
+
+	<div class="db" >
+		<table  class="domian_tab" id="tb" border="1px">
+		<thead id="th" name = "th"><!--
+			<tr>
+			<td width= "4% "rowspan="2">组号</td>
+			<td width= "8% "rowspan="2">项目名称</td>
+
+
+			<div id="fade" class="over"></div>
+			<td width= "6% "rowspan="2" align="left">
+				<select id="choosepassport"class="zb" onchange="change(this)">
+					<option value="0" id="passport">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;周报</option>
+ 
+					<option value="1" id="passport_1" onclick = "hide()" value="点这里关闭本窗口">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一周</option>
+					<option value="2" id="passport_2" onclick = "hide()" value="点这里关闭本窗口">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二组</option>
+					<option value="3" id="passport_3" onclick = "hide()" value="点这里关闭本窗口">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三组</option>
+					<option value="4" id="passport_4" onclick = "hide()" value="点这里关闭本窗口">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四组</option>
+					<option value="5" id="passport_5" onclick = "hide()" value="点这里关闭本窗口">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第五组</option>
+					<option value="6" id="passport_6" onclick = "hide()" value="点这里关闭本窗口">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第六组</option>
+					<option value="7" id="passport_7" onclick = "hide()" value="点这里关闭本窗口">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第七组</option>
+			</td>
+			<td width= "6% "rowspan="2">个人得分</td>
+			<td width= "6% "rowspan="2">项目开题</td>
+			<td width= "6% "rowspan="2">个人得分</td>
+			<td width= "6% "rowspan="2">项目中检</td>
+			<td width= "6% "rowspan="2">个人得分</td>
+			<td width= "6% "rowspan="2">项目答辩</td>
+			<td width= "6% "rowspan="2">个人得分</td>
+			<td width= "6% "rowspan="2">实践报告</td>
+			<td width= "6% "rowspan="2">个人得分</td>
+			<td width= "6% "rowspan="2">项目成绩</td>
+			<td width= "12% "colspan="3">个人加分</td> 
+			<td width= "4% "rowspan="2">减分项</td>
+			</tr>
+			<tr>
+                <td width= "3% ">满勤</td> 
+                <td width= "3% ">获奖</td> 
+                <td width= "6% ">专业贡献</td> 
+			</tr>-->
+		</thead>
+
+		</table>
+    </div>
+
+    
+</body>
+  <script>
+
+	function change(value){
+		var obj =document.getElementById("choosepassport");
+		var index=obj.selectedIndex;
+		var obj_value=obj.options[index].value;
+		var obj_div1 = document.getElementById("passport1");
+		var obj_div2 = document.getElementById("passport2");
+		var obj_div3 = document.getElementById("passport3");
+			if(obj_value=='1'){
+				obj_div1.style.display="block";
+				obj_div2.style.display="none";
+				obj_div3.style.display="none";
+				document.getElementById('fade').style.display='block';
+				document.getElementById('passport1').style.display='block';
+			}else if(obj_value=='2'){
+				obj_div1.style.display="none";
+				obj_div2.style.display="block";
+				obj_div3.style.display="none";
+				document.getElementById('fade').style.display='block';
+				document.getElementById('passport2').style.display='block';
+			}else if(obj_value=='3'){
+				obj_div1.style.display="none";
+				obj_div2.style.display="none";
+				obj_div3.style.display="block";
+				document.getElementById('fade').style.display='block';
+				document.getElementById('passport3').style.display='block';
+			}	
+		}
+function hide1(){
+		document.getElementById('fade').style.display='none';
+		document.getElementById('passport1').style.display='none';
+		}
+		function hide2(){
+		document.getElementById('fade').style.display='none';
+		document.getElementById('passport2').style.display='none';
+		}
+		function hide3(){
+		document.getElementById('fade').style.display='none';
+		document.getElementById('passport3').style.display='none';
+		}
+function changeweek(value){
+	var btc_div1 = document.getElementById("zb1");
+	var btc_div2 = document.getElementById("zb2");
+	var btc_div3 = document.getElementById("zb3");
+	if(value=="第一周"){
+		btc_div1.style.display="none";
+		btc_div2.style.display="block";
+		btc_div3.style.display="none";
+	}else if(value=="第二周"){
+		btc_div1.style.display="none";
+		btc_div2.style.display="block";
+		btc_div3.style.display="none";
+	}else if(value=="第三周"){
+		btc_div1.style.display="none";
+		btc_div2.style.display="none";
+		btc_div3.style.display="block";
+	}
+}
+
+</script>
+</html>
+

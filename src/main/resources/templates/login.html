@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/login/login.css" rel="stylesheet">
+	<link href="css/login/bootstrap.css" rel="stylesheet">
+    <link href="css/login/bootstrapValidator.css" rel="stylesheet">
+    <script src="js/login/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="js/login/bootstrap.min.js" type="text/jscript"></script>
+    <script src="js/login/bootstrapValidator.js" type="text/javascript"></script>
+    <script src="js/login/login.js" type="text/javascript"></script>
+    <title>首页 </title>
+</head>
+<body onload='createCode()'>
+
+<div class="con">
+    <header>
+        <div class="pic"><img src="img/123.png"></div>
+        <div class="word">
+            <h1>哈尔滨华德学院</h1>
+            <h4>软件工程项目实践管理系统-诚毅求真笃学强记</h4>
+        </div>
+    </header>
+    <div class="main">
+        <div class="login">
+            <h2>软件工程项目管理系统</h2>
+            <form id="defaultForm"  class="form-horizontal" name="defaultForm">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" style="margin-left:30px; width:100px; height:30px;">用户名：</label>    
+                            <input type="text" class="text" maxlength="11" name="uid" style="width:200px; height:30px;float:right;" />
+                        </div>
+                        <div class="form-group" style="margin-top:30px;">
+                            <label class="col-lg-3 control-label" style="margin-left:30px; width:100px; height:30px;">密　码：</label> 
+                            <input type="password" class="password" maxlength="16" name="psword" autocomplete="new-password" style="width:200px;height:30px;float:right;" >
+                            
+                        </div>
+                        <div  class="form-group" id="yzyz" style="margin-left:18px; margin-top:25px;"><label class="col-lg-3 control-label" style=" width:100px; height:30px;">验证码：</label>
+                            <input type = "text" id = "input" name="yzm" class="yz" style=" margin-left:10px;" maxlength="4"/>
+                            <input type="button" id="code" onclick="createCode()" style="width:65px; height:30px;" title='点击更换验证码' />
+					</div>
+                    <div class="clear"></div>
+                    <div class="radio_1"><input type="radio" value="stu" name="person" checked>学生</div>
+                    <div class="radio_2"><input type="radio" value="teacher" name="person">教师</div>
+                    <a name="signup"  onclick="valid()" href="javascript:void(0);"  class="btn btn-info submit">登录</a>
+                                <!--<button type="button" class="btn btn-info" id="validateBtn">btu提交</button>
+                                <button type="button" class="btn btn-info" id="resetBtn">重置</button>--> 
+            </form>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <footer><p class="f">@哈尔滨华德学院软件项目管理系统</p></footer>
+</div>
+</body>
+</html>

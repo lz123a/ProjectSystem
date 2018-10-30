@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+.clear{ clear:both}
+body{ margin:0; padding:0;}
+
+/*头部*/
+header{ width:1500px; height:100px;webkit-column-count:1;}
+.pic{ width: 100px; margin-left: 100px; float: left;webkit-column-count:1;}
+.word{ width: 300px; float: left;webkit-column-count:1;}
+.word h1{ font: 35px/10px "微软雅黑"; color: cornflowerblue; margin-top: 20px;webkit-column-count:1;}
+.word h4{ font: 10px/10px "微软雅黑"; color: cornflowerblue; margin-top: 30px;webkit-column-count:1;}
+
+/*中间*/
+.main{
+  width:1500px;
+  height:490px;
+  background:url(../../img/1.jpg) repeat-x;
+
+
+}
+.tab{
+    width: 1500px;
+    height: 30px;
+    color: ivory;
+    font: 14px/28px "微软雅黑";
+    border-bottom:1px solid #ffffff ;
+    padding-left: 350px;
+}
+
+
+.panel-group{
+    width: 200px; height: 450px;
+    margin-left: 100px;
+
+    margin-top: 0;
+
+}
+.side-nav-item {
+  display: block;
+  padding: 10px 15px 10px 15px;
+  background-color:#dddddd;
+  cursor: pointer;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.item-title {
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.panel-heading {
+  margin-top: 5px;
+  padding: 0;
+  border-radius: 3px;
+  border: 1px solid #DDDDDD;
+    opacity: 0.8;
+}
+
+.item-body {
+  padding: 10px 15px 5px 15px;
+  border-bottom: 1px solid #DDDDDD;
+  background: round;
+}
+
+.item-second {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.item-second a {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+
+/*底部*/
+footer{ width:1500px; height:30px;}
+.f{ margin-top: 10px; font: 12px/28px "微软雅黑"; text-align: center; display: block;}
+
+
