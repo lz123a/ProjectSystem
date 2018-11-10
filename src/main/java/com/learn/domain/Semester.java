@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 public class Semester {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     private String name;

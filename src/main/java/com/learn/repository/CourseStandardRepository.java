@@ -21,6 +21,11 @@ public interface CourseStandardRepository extends JpaRepository<CourseStandard,I
     @Query("delete from CourseStandard where teacher_id = ?1 and course_id = ?2 and semester_id = ?3")
     public void  deleteByTIdAndCIdAndSId(int teacher_id,int course_id,int semester_id);
 
+    @Transactional
+    @Modifying
+    @Query("select '*' from CourseStandard where teacher_id = ?1 and course_id = ?2 and semester_id = ?3 order by standard_id")
+    public List<CourseStandard> findByTIDAndCIDAndSID(int teacher_id,int course_id,int semester_id);
+
     public long deleteByTeacher_NameAndCourse_NameAndSemester_Name(String teacher_name,String course_name,String semester_name);
 
     public long removeByTeacher_NameAndCourse_NameAndSemester_Name(String teacher_name,String semester_name,String course_name);

@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class TeacherCourse {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,7 +26,7 @@ public class TeacherCourse {
     @JoinColumn(name = "clas_id")
     private Clas clas;
 
-    public TeacherCourse(){};
+    public TeacherCourse(){}
 
     public int getId() {
         return id;

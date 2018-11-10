@@ -1,12 +1,10 @@
 package com.learn.controller;
 
-import com.learn.domain.Semester;
-import com.learn.domain.Student;
-import com.learn.domain.Teacher;
-import com.learn.domain.User;
+import com.learn.domain.*;
 import com.learn.interceptor.WebSecurityConfig;
 import com.learn.repository.SemesterRepository;
 import com.learn.repository.TeacherRepository;
+import com.learn.repository.TeamRepository;
 import com.learn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +27,8 @@ public class LoginController {
 
     @Autowired
     private SemesterRepository semesterRepository;
+    @Autowired
+    TeamRepository teamRepository;
 
     @GetMapping("/index")
     public String index(@SessionAttribute(SESSION_KEY) String tuid, Model model){
@@ -52,10 +52,39 @@ public class LoginController {
         return "stu";
     }
 
-    @GetMapping("/group")
-    public String group(){
-        return "group";
+    @GetMapping("/a")
+    public String a(@SessionAttribute(SESSION_KEY)String uid,Model model) {
+        List<Team> teamList = teamRepository.findByName(uid);
+        Team team = teamList.get(0);
+        model.addAttribute("state",team.getUploadweek());
+
+        return "a";
     }
+    @GetMapping("/b")
+    public String b(@SessionAttribute(SESSION_KEY)String uid,Model model) {
+        List<Team> teamList = teamRepository.findByName(uid);
+        Team team = teamList.get(0);
+        model.addAttribute("state",team.getUploadopen());
+        model.addAttribute("state1",team.getUploadopencon());
+        return "b";
+    }
+    @GetMapping("/c")
+    public String c(@SessionAttribute(SESSION_KEY)String uid,Model model) {
+        List<Team> teamList = teamRepository.findByName(uid);
+        Team team = teamList.get(0);
+        model.addAttribute("state",team.getUploadmid());
+        model.addAttribute("state1",team.getUploadmidcon());
+        return "c";
+    }
+    @GetMapping("/d")
+    public String d(@SessionAttribute(SESSION_KEY)String uid,Model model) {
+        List<Team> teamList = teamRepository.findByName(uid);
+        Team team = teamList.get(0);
+        model.addAttribute("state",team.getUploadend());
+        model.addAttribute("state1",team.getUploadendcon());
+        return "d";
+    }
+
 
     @PostMapping("/loginPost")
     public @ResponseBody
@@ -78,9 +107,16 @@ public class LoginController {
         }
 
         // 设置session
-        Teacher teacher = user.getTeacher();
-        String tuid = teacher.getName();
-        session.setAttribute(SESSION_KEY, tuid);
+        if(user.getIdentity()==1){
+            Teacher teacher = user.getTeacher();
+            String tuid = teacher.getName();
+            session.setAttribute(SESSION_KEY, tuid);
+        }else{
+            Team team = user.getTeam();
+            String suid = team.getName();
+            session.setAttribute(SESSION_KEY, suid);
+        }
+
         map.put("success", true);
         map.put("message", "登录成功");
         return map;

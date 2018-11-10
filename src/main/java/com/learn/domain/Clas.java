@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "class")
 public class Clas {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     private String name;
@@ -23,11 +23,22 @@ public class Clas {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clas")
     private List<Team> teams;
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "clas")
+    private List<PerGrade> perGrades;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clas")
     private  List<TeacherCourse> teacherCourses;
 
     public Clas(){
 
+    }
+
+    public List<PerGrade> getPerGrades() {
+        return perGrades;
+    }
+
+    public void setPerGrades(List<PerGrade> perGrades) {
+        this.perGrades = perGrades;
     }
 
     public List<TeacherCourse> getTeacherCourses() {

@@ -8,13 +8,16 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private List<Team> teams;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "course")
+    private List<PerGrade> perGrades;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private  List<TeacherCourse> teacherCourses;
@@ -32,6 +35,14 @@ public class Course {
 
     public Course(){
 
+    }
+
+    public List<PerGrade> getPerGrades() {
+        return perGrades;
+    }
+
+    public void setPerGrades(List<PerGrade> perGrades) {
+        this.perGrades = perGrades;
     }
 
     public List<CourseStandard> getCourseStandards() {

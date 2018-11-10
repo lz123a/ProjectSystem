@@ -8,7 +8,7 @@ import java.util.List;
 public class Grade {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     private String name;

@@ -4,7 +4,13 @@ body{ font:#000;}
 .lb div{
     float:left;
 	margin-right:50px;
-} 
+}
+
+.tdd{
+	vertical-align: middle;
+	text-align: center;
+
+}
 
 .an{
 	width:500px;

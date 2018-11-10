@@ -6,9 +6,9 @@
   <meta name="Keywords" content="">
   <meta name="Description" content="">
   <link href="css/index/index.css" rel="stylesheet" type="text/css" media="all"/>
-  <link href="css/index/bootstrap.min.css" rel="stylesheet">
+
   <link href="css/index/bootstrap.css" rel="stylesheet">
-  <script src="js/index/jQuery1.7.js" type="text/javascript"></script>
+  <script src="js/index/jQuery3.0.js" type="text/javascript"></script>
   <script src="js/index/bootstrap.js" type="text/javascript"></script>
   <script src="js/index/index.js" type="text/javascript"></script>
   <title>软件工程项目实践管理系统</title>
@@ -77,7 +77,7 @@
                 </select>
             </div>
             <div class="form-group" data-role="controlgroup" data-type="horizontal" style="float:left">
-            <label for="name" style="color:#337ab7">请选择课程</label>
+            <label  style="color:#337ab7">请选择课程</label>
             <select class="form-control" id="course">
                 <option>===请选择===</option>
             </select>
@@ -93,7 +93,7 @@
                     <input type="button" class="btn btn-primary btn-lg" id="changeStandard" name="changeStandard" onclick="changeStandard1()" value="修改考核标准">
                 </div>
                 <div class="xan">
-                    <input type="button" class="btn btn-primary btn-lg" id="2" value="生成等级成绩表">
+                    <input type="button" class="btn btn-primary btn-lg" id="group1" onclick="changeGroup()" value="修改学生分组">
                 </div>
                 <div class="xan">
                     <input type="button" class="btn btn-primary btn-lg" id="changeGrade" name="changeGrade" value="修改成绩">
@@ -101,8 +101,8 @@
             </div>
 
 	<div class="db" >
-		<table  class="domian_tab" id="tb" border="1px">
-		<thead id="th" name = "th"><!--
+		<table  class="table table-hover" id="tb" border="1px">
+		<thead id="th" name = "th" ><!--
 			<tr>
 			<td width= "4% "rowspan="2">组号</td>
 			<td width= "8% "rowspan="2">项目名称</td>
@@ -140,10 +140,27 @@
                 <td width= "6% ">专业贡献</td> 
 			</tr>-->
 		</thead>
+        <tbody class="table-hover" id="tbody" name="tbody">
+
+        </tbody>
 
 		</table>
     </div>
+                <div class="modal fade" role="dialog" id="mymodal">
+                    <div class="modal-dialog" role="document">
 
+                        <div class="modal-body">
+                            <label class="label label-default">请输入新加的课程</label>
+                            <br>
+                            <br>
+                            <input type="text" class="form-control" id="cou" name="cou" />
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-success" onclick="addCourse()">确认</button>
+                            <br>
+                        </div>
+                    </div>
+                </div>
     
 </body>
   <script>

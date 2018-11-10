@@ -1,11 +1,12 @@
 package com.learn.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Team {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -20,7 +21,10 @@ public class Team {
     @JoinColumn(name = "semester_id")
     private Semester semester;
 
-    private String p_name;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "team")
+    private List<PerGrade> perGrades;
+
+    private String name;
 
     private float open_score;
 
@@ -31,6 +35,94 @@ public class Team {
     private float report_score;
 
     private float weekly_score;
+
+    private float git_score;
+
+    private int uploadweek;
+
+    private int uploadopen;
+
+    private int uploadmid;
+
+    private int uploadend;
+
+    private int uploadopencon;
+
+    private int uploadmidcon;
+
+    private int uploadendcon;
+
+    public int getUploadopencon() {
+        return uploadopencon;
+    }
+
+    public void setUploadopencon(int uploadopencon) {
+        this.uploadopencon = uploadopencon;
+    }
+
+    public int getUploadmidcon() {
+        return uploadmidcon;
+    }
+
+    public void setUploadmidcon(int uploadmidcon) {
+        this.uploadmidcon = uploadmidcon;
+    }
+
+    public int getUploadendcon() {
+        return uploadendcon;
+    }
+
+    public void setUploadendcon(int uploadendcon) {
+        this.uploadendcon = uploadendcon;
+    }
+
+    public int getUploadweek() {
+        return uploadweek;
+    }
+
+    public void setUploadweek(int uploadweek) {
+        this.uploadweek = uploadweek;
+    }
+
+    public int getUploadopen() {
+        return uploadopen;
+    }
+
+    public void setUploadopen(int uploadopen) {
+        this.uploadopen = uploadopen;
+    }
+
+    public int getUploadmid() {
+        return uploadmid;
+    }
+
+    public void setUploadmid(int uploadmid) {
+        this.uploadmid = uploadmid;
+    }
+
+    public int getUploadend() {
+        return uploadend;
+    }
+
+    public void setUploadend(int uploadend) {
+        this.uploadend = uploadend;
+    }
+
+    public List<PerGrade> getPerGrades() {
+        return perGrades;
+    }
+
+    public void setPerGrades(List<PerGrade> perGrades) {
+        this.perGrades = perGrades;
+    }
+
+    public float getGit_score() {
+        return git_score;
+    }
+
+    public void setGit_score(float git_score) {
+        this.git_score = git_score;
+    }
 
     public Clas getClas() {
         return clas;
@@ -56,12 +148,12 @@ public class Team {
         this.semester = semester;
     }
 
-    public String getP_name() {
-        return p_name;
+    public String getName() {
+        return name;
     }
 
-    public void setP_name(String p_name) {
-        this.p_name = p_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public float getOpen_score() {

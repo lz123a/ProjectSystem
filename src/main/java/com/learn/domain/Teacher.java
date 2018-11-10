@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 public class Teacher {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
 
     private String name;

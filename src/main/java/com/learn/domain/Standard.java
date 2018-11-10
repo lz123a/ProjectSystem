@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 public class Standard {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     private String name;
     private int category;
