@@ -1,156 +1,348 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>软件工程项目实现管理系统</title>
-	<link href="css/group/bootstrap-select.min.css" rel="stylesheet" />
-	<link href="css/group/group.css" rel="stylesheet" type="text/css" >
-    <link href="css/group/bootstrap.css" type="text/css" rel="stylesheet" >
-	<script src="js/group/jquery.min.js" type="text/javascript"></script>
-	<script src="js/group/bootstrap.min.js" type="text/javascript" ></script>
-    <script src="js/group/bootstrap-select.js" type="text/javascript"></script>
-    <script src="js/group/group.js" type="text/javascript"></script>
+	<meta charset="utf-8" />
+	<title></title>
+	<script src="js/group/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/group/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <link href="css/group/bootstrap.css" rel="stylesheet" type="text/css" />
+	<script th:inline="javascript">
+        function load() {
+            var names = new Array();
+            names = [[${names}]];
+            var tbHtml = "<tbody style='background: #FFFFFF;' id='memberBody'>";
+            for(var i=0; i<names.length; i++){
+                var trHtml = "<tr><td><input type= 'checkbox' /></td><td>"+names[i]+"</td></tr>"
+                tbHtml += trHtml;
+            }
+            $('#memberBody').html(tbHtml);
+        }
+	</script>
+
+	<style type="text/css">
+		* {
+
+		}
+		.container {
+			height: 500px;
+			margin: 50px auto;
+		}
+		.left {
+			float: left;
+		}
+		.right {
+			float: right;
+		}
+		button {
+			color: white;
+			background: #1A9FFF;
+			padding: 10px;
+			border: 1px solid #4493CC;
+			margin-left: 10px;
+			cursor: pointer;
+			margin-top: 50px;
+		}
+
+		table {
+			text-align: center;
+			color: #5A5B56;
+			font-size: 12px;
+			background: #F2F2F2;
+		}
+
+		td {
+			padding: 5px;
+		}
+	</style>
 </head>
-<body>
-<div class="panel panel-primary" style="width:1200px; margin:0 auto; margin-top:30px;">
-    <div class="panel-heading">
-        <h3 class="panel-title">教师分组</h3>
-    </div>
-    <div class="panel-body">
-        <div id="contanier" style="width:1000px; margin:0 auto;">
-		<form method="get" action="#" role="form">
-			<div id="choosenj" class="form-group">
-				<select id="test_select" onchange="change(this)" class="selectpicker" data-live-search="true" data-live-search-placeholder="搜索"  style="float:left; margin-left:30px;">
-					<option value="0">选择</option>
-					<option value="1">15</option>
-					<option value="2">16</option>
-					<option value="3">17</option>
-				</select>
-			</div>
-			<div id="chooseclass" style="float:left;">
-				<div id="test1" class="choose">
-						<input type="button" id="class15_1" class="btn1" value="1501311" onclick="changeclass(value)"/>
-						<input type="button" id="class15_2" class="btn1" value="1501312" onclick="changeclass(value)"/>
-						<input type="button" id="class15_3" class="btn1" value="1501313" onclick="changeclass(value)"/>
-						<input type="button" id="class15_4" class="btn1" value="1501411"/>
-						<input type="button" id="class15_5" class="btn1" value="1501412"/>
-				</div>
-				<div id="test2" class="choose">
-						<input type="button" id="class16_1" class="btn1" value="1601311"/>
-						<input type="button" id="class16_2" class="btn1" value="1601312"/>
-						<input type="button" id="class16_3" class="btn1" value="1601313"/>
-						<input type="button" id="class16_4" class="btn1" value="1601411"/>
-						<input type="button" id="class16_5" class="btn1" value="1601412"/>
-				</div>
-				<div id="test3" class="choose">
-						<input type="button" id="class17_1" class="btn1" value="1701311"/>
-						<input type="button" id="class17_2" class="btn1" value="1701312"/>
-						<input type="button" id="class17_3" class="btn1" value="1701313"/>
-						<input type="button" id="class17_4" class="btn1" value="1701411"/>
-						<input type="button" id="class17_5" class="btn1" value="1701412"/>
-				</div>
-			</div>
-			<div id="chooserm" style="float:right; margin-right:450px;">
-				<div id="class1501311" class="chooseperson" >
-					<table border="1" id="waybillTable_1" class="bordered"> 
-					<thead> 
-						<th style="text-align:center; height:40px; color:#0033FF;">成员</th>   
-					</thead> 
-					<tbody id="tab_sendValue1" style="width:200px;"> 
-						<tr>
-							<td><input type="checkbox" id="id150131104" class="check" name="item" value="150131104"><input type="button" id="btn150131104" class="btn1" onclick="sel(id)" value="曾令洋"/></td> 
-						</tr>
-						<tr>
-							<td><input type="checkbox" id="id150131105" class="check" name="item" value="150131105"><input type="button" id="btn150131105" class="btn1" onclick="sel(id)" value="吴迪"/></td> 						
-						</tr>
-						<tr> 
-							<td><input type="button" id="btn150131101" class="btn1" onclick="sel(id)" value="潘晔"/></td>
-						</tr>
-						<tr>
-							<td><input type="button" id="btn150131102" class="btn1" onclick="sel(id)" value="李恩书"/></td>
-						</tr>
-						<tr>
-							<td><input type="button" id="btn150131103" class="btn1" onclick="sel(id)" value="张雨桐"/></td> 							
-						</tr> 
-					</tbody> 
-					</table> 
-					
-                    <button type="button" id="fzbtn" style="width:200px; height:40px;" onclick="sendtoteam()" value="生成小组" class="btn btn-primary">生成小组</button>
-					
-				</div>
-				<div id="class1501312" class="chooseperson" >
-					<table border="1" id="waybillTable_2" class="bordered"> 
-					<thead> 
-						<tr> 
-							<th style="text-align:center; height:40px; color:#0033FF;">成员</th>   
-						</tr> 
-					</thead> 
-					<tbody id="tab_sendValue1"> 
-						<tr> 
-							<td><input type="checkbox" id="id150131201" class="check" name="item" value="2"><input type="button" id="150131201" class="btn1" onclick="sel(id)" value="李思琦"/></td> 
-						</tr>
-						<tr>
-							<td><input type="checkbox" id="id150131202" class="check" name="item" value="3"><input type="button" id="150131202" class="btn1" onclick="sel(id)" value="郭宇迪"/></td> 					
-						</tr>
-						<tr>
-							<td><input type="checkbox" id="id150131203" class="check" name="item" value="4"><input type="button" id="150131203" class="btn1" onclick="sel(id)" value="阮智利"/></td> 
-						</tr>
-						<tr>
-							<td><input type="checkbox" id="id150131204" class="check" name="item" value="5"><input type="button" id="150131204" class="btn1" onclick="sel(id)" value="徐可"/></td> 
-						</tr>
-						<tr>
-							<td><input type="checkbox" id="id150131205" class="check" name="item" value="6"><input type="button" id="150131205" class="btn1" onclick="sel(id)" value="盛鑫"/></td> 
-						</tr> 
-					</tbody> 
-					</table> 
-					
-                    <button type="button" id="fzbtn" style="width:200px; height:40px;" onclick="sendtoteam()" value="生成小组" class="btn btn-primary">生成小组</button>
-					
-				</div>
-				<div id="class1501313" class="chooseperson" >
-					<table border="1" id="waybillTable_3" class="bordered"> 
-					<thead> 
-						<tr> 
-							<th style="text-align:center; height:40px; color:#0033FF;">成员</th>  
-						</tr> 
-					</thead> 
-					<tbody id="tab_sendValue1"> 
-						<tr> 
-							<td><input type="checkbox" id="id150131301" class="check" name="item" value="2"><input type="button" id="150131301" class="btn1" onclick="sel(id)" value="呼树森"/></td> 
-						</tr>
-						<tr>
-							<td><input type="checkbox" id="id150131302" class="check" name="item" value="3"><input type="button" id="150131302" class="btn1" onclick="sel(id)" value="张宏"/></td> 
-						</tr>
-						<tr>
-							<td><input type="checkbox" id="id150131303" class="check" name="item" value="4"><input type="button" id="150131303" class="btn1" onclick="sel(id)" value="关升"/></td> 
-						</tr>
-						<tr>
-							<td><input type="checkbox" id="id150131304" class="check" name="item" value="5"><input type="button" id="150131304" class="btn1" onclick="sel(id)" value="王鑫蕊"/></td> 
-						</tr>
-						<tr>
-							<td><input type="checkbox" id="id150131305" class="check" name="item" value="6"><input type="button" id="150131305" class="btn1" onclick="sel(id)" value="张智博"/></td> 
-						</tr>
-					</tbody> 
-					</table> 
-					<button type="button" id="fzbtn" style="width:200px; height:40px;" onclick="sendtoteam()" value="生成小组" class="btn btn-primary">生成小组</button>
-				</div>
-			</div>
-			<div id="bechoosed" style="float:right;">
-				<table class="bordered1" border="1px"> 
-				<thead> 
-				<tr> 
-					<th style="border:1px solid #CCCCCC; color:#0066FF;">已选成员</th> 
-				</tr> 
-				</thead> 
-				<tbody id="tab_sendValue3" name="tab_sendValue3"> 
-				</tbody> 
-				</table>
-			</div>
-        </form>
+<body onload="load()">
+
+<script type="text/javascript">
+    (function ($) {
+        $.getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURI(r[2]); return null;
+        }
+    })(jQuery);
+
+    function subGroup() {
+        var semester = decodeURI($.getUrlParam('semester'));
+        var course = decodeURI($.getUrlParam('course'));
+        var clas = decodeURI($.getUrlParam('clas'));
+        $("#groupBody input").attr("checked","checked");
+        var $tr = $("#groupBody tr");
+
+        var group = "";
+        for(var i = 0; i < $tr.length; i ++) { // 处理每行
+            var members = new Array();
+            group += "@";
+            var $checked = $($tr[i]).find("input:checked");
+         //   alert(i);
+            for(var j = 0; j < $checked.length; j++) { // 处理每个单元格
+                if($($checked[j]).parent().next().text() == "小组成员") { //过滤这个选择
+                    continue;
+                }group += "&";
+                group += $($checked[j]).parent().next().text();
+            //    group[i].push($($checked[j]).parent().next().text());
+            //    alert($($checked[j]).parent().next().text());
+                members.push($($checked[j]).parent().next().text());
+            }
+            group += "&";
+        }
+        group += "@";
+        alert("aaa");
+        $.ajax({
+            type:"POST",
+            url:"/saveGroup",
+            data:{group:group,semester:semester,course:course,clas:clas},
+            dataType: "JSON",
+            async: true,
+            success:function (data) {
+                //   $(location).attr('href', 'index');
+                alert(data.message);
+                $(location).attr('href', 'index');
+            }
+        })
+    }
+
+    // 选中当前组所有的复选框
+    function rowSelected(chec) {
+        if(chec.checked) {
+            var charr = $(chec).parent().parent().children().find("input");
+
+            for(var i = 0; i < charr.length; i++) {
+                $(charr[i]).attr("checked","checked");
+            }
+
+        } else {
+            var charr = $(chec).parent().parent().children().find("input");
+
+            for(var i = 0; i < charr.length; i++) {
+                $(charr[i]).removeAttr("checked");
+            }
+        }
+
+    }
+
+    $(function() {
+        $("#createGroup").click(function() {
+            var $checked = $("#listTable input:checked");
+            if($checked.length > 0) {  // 有选中的
+                // 在右边生成一个小组
+                var group = [];
+
+                for(var i = 0; i < $checked.length; i++) {
+                    var c = $checked[i];
+                    $(c).parent().parent().remove();
+                    group[i] = $(c).parent().next().text();
+            //        alert(group[i]);
+                }
+
+                // 添加到小组
+                var $tr = $("<tr><td><input type='checkbox' onChange='rowSelected(this)' /></td><td>小组成员</td></tr>")
+                for(var i = 0; i < group.length; i ++) {
+                    $tr.append($("<td><input type='checkbox' /></td>"));
+                    $tr.append($("<td>"+group[i]+"</td>"));
+                }
+                $("#groupBody").append($tr);
+
+            }
+        });
+        $("#returnList").click(function() {
+            var $tr = $("#groupBody tr");
+
+            for(var i = 0; i < $tr.length; i ++) { // 处理每行
+                var members = new Array();
+                var $checked = $($tr[i]).find("input:checked");
+         //       alert(i);
+                var removeList = new Array();
+                for(var j = 0; j < $checked.length; j++) { // 处理每个单元格
+                    if($($checked[j]).parent().next().text() == "小组成员") { //过滤这个选择
+                        continue;
+                    }
+        //            alert($($checked[j]).parent().next().text());
+                    members.push($($checked[j]).parent().next().text());
+
+                    removeList.push($($checked[j]).parent()); // 复选框单元格
+                    removeList.push($($checked[j]).parent().next());  // 姓名单元格
+                }
+
+
+                for(var x = 0; x < removeList.length; x++) { // 移除所有元素
+                    $(removeList[x]).remove();
+                }
+
+                // 判断当前行是否只剩下两个单元格
+                if($($tr[i]).children().find("input").size() == 1) $($tr[i]).remove();
+
+                // 还原到成员表格
+                for(var y = 0; y < members.length; y ++) {
+                    var $newTr = $("<tr><td><input type='checkbox' /></td><td>"+members[y]+"</td></tr>");
+                    $("#memberBody").append($newTr);
+                }
+            }
+        });
+        $("#memberAll").change(function() { // 选择所有成员
+            if(this.checked) {
+                $("#listTable input").attr("checked","checked");
+            } else {
+                $("#listTable input").removeAttr("checked");
+            }
+        });
+
+        $("#selectedMember").change(function() { // 选择所有成员
+            if(this.checked) {
+                $("#groupBody input").attr("checked","checked");
+            } else {
+                $("#groupBody input").removeAttr("checked");
+            }
+        });
+
+
+
+    });
+</script>
+
+<div class="container">
+	<div class="left">
+		<table id="listTable" border="1" bordercolor="#E8E8E8"  cellpadding="0" cellspacing="0">
+			<thead style="background: #F2F2F2;">
+                <tr>
+                    <td><input type="checkbox" id="memberAll"  /></td>
+                    <td>成员</td>
+                </tr>
+			</thead>
+			<tbody style="background: #FFFFFF;" id="memberBody">
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>李恩书</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>张雨桐</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>曾令详</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>张三</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>李四</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>曾令详</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>张三</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>李四</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>曾令详</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>张三</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>李四</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>曾令详</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>张三</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>李四</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>曾令详</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>张三</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>李四</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王五</td>
+			</tr>
+			</tbody>
+		</table>
 	</div>
-    </div>
+	<div class="left">
+		<button type="button" id="createGroup">生成小组</button> <br />
+		<button type="button" id="returnList">返回列表</button>
+	</div>
+	<div class="left">
+		<table id="groupTable" border="1" bordercolor="#E8E8E8"  cellpadding="0" cellspacing="0">
+			<thead style="background: #F2F2F2;">
+			<tr>
+				<td><input type="checkbox" id="selectedMember" /></td>
+				<td>已选成员</td>
+			</tr>
+			</thead>
+			<tbody style="background: #FFFFFF;" id="groupBody">
+
+			</tbody>
+		</table>
+	</div>
+    <input type="button" class="btn btn-success" value="提交分组" onclick="subGroup()">
 </div>
-	
-	
 </body>
 </html>

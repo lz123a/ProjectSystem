@@ -29,8 +29,19 @@ public class Clas {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clas")
     private  List<TeacherCourse> teacherCourses;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clas")
+    private  List<Sname> snames;
+
     public Clas(){
 
+    }
+
+    public List<Sname> getSnames() {
+        return snames;
+    }
+
+    public void setSnames(List<Sname> snames) {
+        this.snames = snames;
     }
 
     public List<PerGrade> getPerGrades() {

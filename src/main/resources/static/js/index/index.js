@@ -199,12 +199,8 @@ function getScore() {
             for(var i=0; i<d.length; i++){
                 var x = {};
                 x = d[i];
-                // for(keyk in x){
-                //     alert(keyk + " "+ x[keyk])
-                // }
-
                 var teamSize = x['teamSize'];
-                alert(i+"  "+j+"  "+teamSize+"  aaav");
+           //     alert(i+"  "+j+"  "+teamSize+"  aaav");
                 for(var j=i+1; j<i+teamSize+1; j++){
                     var trHtml="<tr>  class='tdd' align='center' ";
                     if(j==i+1){
@@ -213,13 +209,9 @@ function getScore() {
                         tdHtml += "<td align='center' class='tdd' rowspan='"+teamSize+"'>"+x['项目名称']+"</td>";
                         trHtml += tdHtml;
                     }
-
                     var xx = {};
                     xx = d[j];
-                 //   for(key in xx){
-                 //       alert(key + " "+ xx[key])
-                  //  }
-                    alert(xx['开题']+"  aaa "+j);
+            //        alert(xx['开题']+"  aaa "+j);
                     var tdHtml1 = "";
                     for(var kk=0; kk<li.length; kk++){
                         if(li[kk]=='加分项')
@@ -235,7 +227,7 @@ function getScore() {
                     trHtml = trHtml + tdHtml1 + "</tr>";
                     tbodyhtml += trHtml;
                 }
-                alert(i+"  "+j +" ij");
+          //      alert(i+"  "+j +" ij");
                 i = j-1;
 
                /* for(key in x){
@@ -328,3 +320,198 @@ function GradeBind(){
 	$("#grade").append(str);
 
 }
+
+
+//下拉框初始数据
+//var data = [{ "id": 1, "text": "曾令祥" }, { "id": 2, "text": "吴迪" }, { "id": 3, "text": "潘晔" }, { "id": 4, "text": "李恩书" }, { "id": 5, "text": "张雨桐" }, { "id": 6, "text": "阿大撒" }, { "id": 7, "text": "饿强强" }, { "id": 8, "text": "让人" }, { "id": 9, "text": "请问日期" }, { "id": 10, "text": "张全球" }, { "id": 11, "text": "阿方法" }];
+var data;
+//右侧栏数据集合，用于判重
+var selectMember = [];
+
+function getData1(){
+    data = new Array();
+    var zz = document.getElementById("cla");
+    var clas = zz.options[zz.selectedIndex].text;
+    $.ajax({
+        type: 'post',
+        url: "/getData",
+        data:{clas:clas},
+        dataType:"JSON",
+        async:false,
+        success:function (data1) {
+        //    alert(data.message);
+        //    $('#tb').html(data);
+            var name = new Array();
+            name = data1.message;
+            for(var i=0; i<name.length; i++){
+                data[i] = {};
+                data[i].set("id",(i+1));
+                data[i].set("text",name[i]);
+            }
+            initData(data);
+
+        },
+        error: function (data1) {
+            alert("Error"); }
+
+    })
+}
+
+//初始化页面
+/*$(document).ready(function () {
+    //初始化数据
+    initData(data);
+})*/
+/**
+ * 初始化数据，给左侧下拉框绑定下拉选项
+ */
+function initData(data) {
+    var $languageRemove = document.querySelector('#languageRemove');
+    data.forEach(function (item, index) {
+        var objOption = document.createElement("option");
+        objOption.text = item.text;
+        objOption.value = item.id;
+        objOption.disabled = !!item.IsDisable;
+        $languageRemove.appendChild(objOption);
+    });
+}
+/**
+ * 选中项添加到右边，左侧栏数据不删除，并且不能添加重复数据到右边
+ */
+function copyOption(obj, type) {
+    var eleA = "";
+    var eleB = "";
+    if (type == "add") {//从左侧向右侧添加数据
+        eleA = obj.parentNode.previousElementSibling.firstElementChild;
+        eleB = obj.parentNode.nextElementSibling.firstElementChild;
+    } else {//删除右侧数据
+        eleA = obj.parentNode.nextElementSibling.firstElementChild;
+        eleB = obj.parentNode.previousElementSibling.firstElementChild;
+    }
+    for (var i = 0; i < eleA.options.length; i++) {
+        if (eleA.options[i].selected) {
+            var eSelected = eleA.options[i];
+            if (type == "add") {
+                if (selectMember.indexOf(eSelected.text) < 0) {//判断左边选中项在右侧群成员列表中是否存在
+                    eleB.options.add(new Option(eSelected.text, eSelected.value));//将选中项添加到右边
+                    selectMember.push(eSelected.text); //将选中值追加到selectMember[]中
+                } else {
+                    alert("该项在右侧列表已经存在");
+                }
+            } else {
+                eleA.remove(i);//移除选中项
+                i = i - 1;//每移除一项，下拉选项的索引值会减1
+                selectMember.splice($.inArray(eSelected.text, selectMember), 1); //将选中值从selectMember[]中移除
+            }
+        }
+    }
+}
+/**
+ * 选中项左右移动
+ */
+function moveOption(eleA, eleB) {
+    for (var i = 0; i < eleA.options.length; i++) {
+        if (eleA.options[i].selected) {
+            var eSelected = eleA.options[i];
+            eleB.options.add(new Option(eSelected.text, eSelected.value));//将选中项添加到右边
+            eleA.remove(i);//移除选中项
+            i = i - 1;//每移除一项，下拉选项的索引值会减1
+        }
+    }
+}
+
+function shoumodal2() {
+    getData1();
+    $('#mymoda2').modal();
+}
+
+function shoumodal3() {
+ //   $('#teamscorelist').selectpicker('refresh');
+    var y = document.getElementById("semester");
+    var semester = y.options[y.selectedIndex].text;
+    var z = document.getElementById("course");
+    var course = z.options[z.selectedIndex].text;
+    var zz = document.getElementById("cla");
+    var clas = zz.options[zz.selectedIndex].text;$('#mymoda3').modal();
+    $.ajax({
+        type: 'post',
+        url: "/teamPost",
+        data:{semester:semester,course:course,clas:clas},
+        dataType:"JSON",
+        async:true,
+        success:function (data) {
+            var teamName = new Array();
+            teamName = data.message;
+            var str = "<option>请选择</option>";
+            for(var i=0; i<teamName.length; i++){
+                str += "<option>"+teamName[i]+"</option>";
+            }
+       //     alert(str);
+            $('#teamlist').html("");
+            $('#teamlist').append(str);
+
+        }
+
+    })
+}
+
+
+$(function(){
+    $("#teamlist").change(function (){
+        getTeamScore();
+    })
+})
+
+function getTeamScore() {
+    var x = document.getElementById("teamlist");
+    var name = x.options[x.selectedIndex].text;
+
+    $.ajax({
+        type: 'post',
+        url: "/teamScorePost",
+        data:{name:name},
+        dataType:"JSON",
+        async:true,
+        success:function (data) {
+            var canGetScore = new Array();
+            canGetScore = data.message;
+            var str = "<option>请选择</option>";
+            for(var i=0; i<canGetScore.length; i++){
+                str += "<option>"+canGetScore[i]+"</option>";
+            }
+       //     alert(str);
+            $('#teamscorelist').html("");
+            $('#teamscorelist').append(str);
+        }
+
+    })
+}
+
+function changeTeamScore() {
+    var x = document.getElementById("teamlist");
+    var name = x.options[x.selectedIndex].text;
+    var y = document.getElementById("teamscorelist");
+    var item = y.options[y.selectedIndex].text;
+    var score = $('#newscore').val();
+    var z;
+    if(item=="项目名称"){
+        z = score;
+        score = 1;
+    }
+    alert(name+" "+item+" "+score);
+    $.ajax({
+        type: 'post',
+        url: "/changeScore",
+        data:{name:name,item:item,score:score,newName:z},
+        dataType:"JSON",
+        async:false,
+        success:function (data) {
+            alert(data.message);
+            $('#tb').html(data);
+        },
+        error: function (data) {
+             alert("Error"); }
+
+    })
+}
+

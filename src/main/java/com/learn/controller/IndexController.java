@@ -24,7 +24,6 @@ public class IndexController {
 
     @Autowired
     TeacherRepository teacherRepository;
-
     @Autowired
     SemesterRepository semesterRepository;
     @Autowired
@@ -37,6 +36,10 @@ public class IndexController {
     GradeRepository gradeRepository;
     @Autowired
     TeamRepository teamRepository;
+    @Autowired
+    PerGradeRepository perGradeRepository;
+    @Autowired
+    SnameRepository snameRepository;
 
     @RequestMapping("/getScore")
     public @ResponseBody Map<String ,Object>  getScore(@SessionAttribute(SESSION_KEY)String uid,String semester,String course,String clas){
@@ -245,6 +248,128 @@ public class IndexController {
         map.put("success",true);
         map.put("course",courseNameList);
         return  map;
+    }
+
+    @RequestMapping("/teamPost")
+    public @ResponseBody Map<String, Object> teamPost(@SessionAttribute(SESSION_KEY)String uid,String semester,String course,String clas){
+        Map<String,Object> map = new HashMap<>();
+        List<Team> teamList = teamRepository.findByClas_NameAndCourse_NameAndSemester_Name(clas,course,semester);
+        List<String> teamName = new ArrayList<>();
+        for (Team team : teamList) {
+            teamName.add(team.getName());
+        }
+        map.put("success",true);
+        map.put("message",teamName);
+        return map;
+    }
+
+    @RequestMapping("/teamScorePost")
+    public @ResponseBody Map<String, Object> teamScorePost(@SessionAttribute(SESSION_KEY)String uid,String semester,String course,String clas,String name){
+        Map<String,Object> map = new HashMap<>();
+        List<Team> teamList = teamRepository.findByName(name);
+        Team team = teamList.get(0);
+        List<String> canGetScoreName = new ArrayList<>();
+        if(team.getUploadweek()==1){
+            canGetScoreName.add("周报");
+        }
+        if(team.getUploadopen()==1&&team.getUploadopencon()==1){
+            canGetScoreName.add("开题");
+        }
+        if(team.getUploadmid()==1&&team.getUploadmidcon()==1){
+            canGetScoreName.add("中检");
+        }
+        if(team.getUploadend()==1&&team.getUploadendcon()==1){
+            canGetScoreName.add("末检");
+            canGetScoreName.add("报告");
+        }
+        CourseStandard courseStandard = courseStandardRepository.findByTeacher_NameAndCourse_NameAndSemester_NameAndStandard_Name(uid,semester,course,"版本控制工具");
+        if(courseStandard!=null){
+            canGetScoreName.add("版本控制工具");
+        }
+        canGetScoreName.add("项目名称");
+
+        map.put("success",true);
+        map.put("message",canGetScoreName);
+        return map;
+    }
+
+    @RequestMapping("/changeScore")
+    public @ResponseBody Map<String ,Object> changeScore(@SessionAttribute(SESSION_KEY)String uid,String name,String item,int score,String newName){
+        Map<String,Object> map = new HashMap<>();
+        Team team = teamRepository.findByName(name).get(0);
+        List<PerGrade> perGradeList = team.getPerGrades();
+        if(item.equals("开题")){
+            team.setOpen_score(score);
+            for (PerGrade perGrade : perGradeList) {
+                perGrade.setProAll_score(perGrade.getProAll_score()-perGrade.getOpen_score()+(perGrade.getOpen_con()*score));
+                perGrade.setAll_score(perGrade.getAll_score()-perGrade.getOpen_con()*score-perGrade.getOpen_score());
+                perGrade.setOpen_score(perGrade.getOpen_con()*score);
+                perGradeRepository.save(perGrade);
+            }
+            teamRepository.save(team);
+        }else if(item.equals("中检")){
+            team.setMid_score(score);
+            for (PerGrade perGrade : perGradeList) {
+                perGrade.setProAll_score(perGrade.getProAll_score()-perGrade.getMid_score()+(perGrade.getMid_con()*score));
+                perGrade.setAll_score(perGrade.getAll_score()-perGrade.getMid_score()+(perGrade.getMid_con()*score));
+                perGrade.setMid_score(perGrade.getMid_con()*score);
+                perGradeRepository.save(perGrade);
+            }
+        }else if(item.equals("末检")){
+            team.setEnd_score(score);
+            for (PerGrade perGrade : perGradeList) {
+                perGrade.setProAll_score(perGrade.getProAll_score()-perGrade.getEnd_score()+(perGrade.getEnd_con()*score));
+                perGrade.setAll_score(perGrade.getAll_score()-perGrade.getEnd_score()+(perGrade.getEnd_con()*score));
+                perGrade.setEnd_score(perGrade.getEnd_con()*score);
+                perGradeRepository.save(perGrade);
+            }
+        }else if(item.equals("周报")){
+            team.setWeekly_score(score);
+            for (PerGrade perGrade : perGradeList) {
+                perGrade.setProAll_score(perGrade.getProAll_score()-perGrade.getWeekly_score()+score);
+                perGrade.setAll_score(perGrade.getAll_score()-perGrade.getWeekly_score()+score);
+                perGrade.setWeekly_score(score);
+                perGradeRepository.save(perGrade);
+            }
+        }else if(item.equals("报告")){
+            team.setReport_score(score);
+            for (PerGrade perGrade : perGradeList) {
+                perGrade.setProAll_score(perGrade.getProAll_score()-perGrade.getReport_score()+score);
+                perGrade.setAll_score(perGrade.getAll_score()-perGrade.getReport_score()+score);
+                perGrade.setReport_score(score);
+                perGradeRepository.save(perGrade);
+            }
+        }else if(item.equals("版本控制工具")){
+            team.setGit_score(score);
+            for (PerGrade perGrade : perGradeList) {
+                perGrade.setProAll_score(perGrade.getProAll_score()-perGrade.getGit_score()+score);
+                perGrade.setAll_score(perGrade.getAll_score()-perGrade.getGit_score()+score);
+                perGrade.setGit_score(score);
+                perGradeRepository.save(perGrade);
+            }
+        }else if(item.equals("项目名称")){
+            team.setName(newName);
+            teamRepository.save(team);
+        }
+        teamRepository.save(team);
+        map.put("success",true);
+        map.put("message","修改成功");
+        return map;
+    }
+
+    @RequestMapping("/getData")
+    public @ResponseBody Map<String,Object> getData(@SessionAttribute(SESSION_KEY)String uid,String clas){
+        Map<String,Object> map = new HashMap<>();
+        List<Sname> snames = snameRepository.findByClas_Name(clas);
+        List<String> names = new ArrayList<>();
+        for (Sname sname : snames) {
+            names.add(sname.getName());
+        }
+        System.out.println(names.size());
+        map.put("success",true);
+        map.put("message",names);
+
+        return map;
     }
 
 }

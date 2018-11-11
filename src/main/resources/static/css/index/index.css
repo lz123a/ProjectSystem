@@ -3,7 +3,7 @@ body{ font:#000;}
 
 .lb div{
     float:left;
-	margin-right:50px;
+	margin-right:20px;
 }
 
 .tdd{
@@ -13,10 +13,18 @@ body{ font:#000;}
 }
 
 .an{
-	width:500px;
+	width:660px;
 	height:30px;
 	float:right;
 	
+}
+.modal {
+
+    position: fixed;
+    /* top: 0; */
+    /* right: 0; */
+    /* bottom: 0; */
+    left: 500px;
 }
 
 .an div{
@@ -63,4 +71,37 @@ body{ font:#000;}
      background-color: red; 
      z-index:1002;	<!-- 优先级 -->
      overflow: auto;	 <!-- 内容滚动条 -->	
-        } 
+        }
+
+
+.choose{
+    width: 145px;
+    text-align: center;
+    border: 1px solid #ccc;
+    color: #4BB2FF;
+    top: 42px;
+    left: 251px;
+}
+p {
+    width: 145px;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 10px 0px -3px 2px;
+    color: #4BB2FF;
+}
+
+select[multiple], select[size] {
+    height: 300px;
+}
+
+.sel-box {
+    width: 100%;
+    border: 1px solid #cccccc;
+
+    padding: 10px;
+    text-align: center;
+
+
+    line-height: 30px;
+
+}

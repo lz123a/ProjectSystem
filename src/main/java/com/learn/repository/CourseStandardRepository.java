@@ -26,6 +26,8 @@ public interface CourseStandardRepository extends JpaRepository<CourseStandard,I
     @Query("select '*' from CourseStandard where teacher_id = ?1 and course_id = ?2 and semester_id = ?3 order by standard_id")
     public List<CourseStandard> findByTIDAndCIDAndSID(int teacher_id,int course_id,int semester_id);
 
+    public CourseStandard findByTeacher_NameAndCourse_NameAndSemester_NameAndStandard_Name(String teahcer,String course,String semester,String standard);
+
     public long deleteByTeacher_NameAndCourse_NameAndSemester_Name(String teacher_name,String course_name,String semester_name);
 
     public long removeByTeacher_NameAndCourse_NameAndSemester_Name(String teacher_name,String semester_name,String course_name);
