@@ -345,8 +345,8 @@ function getData1(){
             name = data1.message;
             for(var i=0; i<name.length; i++){
                 data[i] = {};
-                data[i].set("id",(i+1));
-                data[i].set("text",name[i]);
+                data[i]['id']=(i+1);
+                data[i]['text']=name[i];
             }
             initData(data);
 
